@@ -2,7 +2,7 @@
 
     <div class="container mt-5">
         <div class="dropdown">
-            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
+            <button class="btn btn-outline-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
                 選擇類別
             </button>
@@ -19,12 +19,12 @@
     <table class="table">
         <thead class="table-dark">
             <tr>
-                <th>Category</th>
-                <th>Name</th>
-                <th>Date</th>
-                <th>Cost</th>
-                <th>Edit</th>
-                <th>Delete</th>
+                <th>類別</th>
+                <th>名稱</th>
+                <th>日期</th>
+                <th>花費</th>
+                <th>編輯</th>
+                <th>刪除</th>
             </tr>
         </thead>
         {{#each records}}
@@ -33,40 +33,17 @@
             <td>{{this.name}}</td>
             <td>{{dateNoTime this.date}}</td>
             <td>{{this.amount}}</td>
-            <td><a class="btn btn-link link-primary" href="/record/{{this.id}}/edit">Edit</a></td>
+            <td><a class="btn btn-primary" href="/record/{{this.id}}/edit">編輯</a></td>
             <td><form action="/record/{{this.id}}?_method=DELETE" method="POST" style="display: inline;">
-                <button type="submit" class="btn btn-link link-danger"
-                    onclick="return confirm(`確定要刪除 {{ this.name }} 嗎？`)">Delete</button>
+                <button type="submit" class="btn btn-danger"
+                    onclick="return confirm(`確定要刪除 {{ this.name }} 嗎？`)">刪除</button>
             </form></td>
         </tr>
         {{/each}}
     </table>
-    <div>4</div>
+    <div>
+        <a class="btn btn-success" href="/record/new">新增支出</a>
+
+    </div>
 </div>
 
-{{!--
-<ul class="list-group">
-    {{#each record}}
-    <li class="list-group-item">
-        <div class="row">
-            <div class="col-auto me-auto">
-                <div>
-                    {{}}
-                </div>
-                <h4 style="display: inline; vertical-align: middle;">
-                    {{ this.name }}
-                </h4>
-            </div>
-            <div class="col-auto">
-                <a href="/records/{{this._id}}/edit"><button class="btn btn-success btn-edit">編輯</button></a>
-                <form action="/records/{{this._id}}?_method=DELETE" method="POST" style="display: inline">
-                    <button class="btn btn-danger btn-delete" type="submit"
-                        onclick="return confirm(`確定要刪除 {{ this.name }} 嗎？`)">刪除</button>
-                </form>
-            </div>
-        </div>
-    </li>
-    {{/each}}
-</ul>
-
-<a href="/records/new" class="btn btn-primary mb-3">新增支出</a> --}}

@@ -5,7 +5,11 @@ const categorySchema = new Schema({
     category: {
         type: String,
         required: true
+    },
+    icon: {
+        type: String,
+        required: true
     }
 })
 
-module.exports = mongoose.model('Category', userSchema)
+module.exports = mongoose.model('Category', categorySchema)

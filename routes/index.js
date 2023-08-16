@@ -12,6 +12,7 @@ const { authenticator } = require('../middleware/auth')
 
 
 router.use('/users', users) 
+router.use('/record', authenticator, records) 
 router.use('/', authenticator, home)
 
 

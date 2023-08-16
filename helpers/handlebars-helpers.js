@@ -6,6 +6,6 @@ module.exports = {
     return a === b
   },
   dateNoTime: function (date) {
-    return dayjs(date).format('YYYY年MM月DD日');
+    return dayjs(date).format('YYYY-MM-DD');
   },
 }

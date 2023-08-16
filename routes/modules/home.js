@@ -1,13 +1,13 @@
 const express = require('express')
 const router = express.Router()
 
-const categories = require('../../models/category')
-const records = require('../../models/record')
-const users = require('../../models/user')
+const Categories = require('../../models/category')
+const Records = require('../../models/record')
+const Users = require('../../models/user')
 
 let sortCategories
 
-categories.find()
+Categories.find()
     .lean()
     .sort({ _id: 'asc' })
     .then(categories => {
@@ -18,7 +18,7 @@ categories.find()
 router.get('/', (req, res) => {
     const userId = req.user._id
 
-    records.find({ userId })
+    Records.find({ userId })
         .populate('categoryId')
         .lean()
         .sort({ _id: 'asc' })

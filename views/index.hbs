@@ -34,7 +34,7 @@
             <td>{{dateNoTime this.date}}</td>
             <td>{{this.amount}}</td>
             <td><a class="btn btn-primary" href="/record/{{this._id}}/edit">編輯</a></td>
-            <td><form action="/record/{{this.id}}?_method=DELETE" method="POST" style="display: inline;">
+            <td><form action="/record/{{this._id}}?_method=DELETE" method="POST" style="display: inline;">
                 <button type="submit" class="btn btn-danger"
                     onclick="return confirm(`確定要刪除 {{ this.name }} 嗎？`)">刪除</button>
             </form></td>

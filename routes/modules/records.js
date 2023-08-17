@@ -57,11 +57,11 @@ router.put("/:id", (req, res) => {
 
 
 // 刪除
-router.delete('/:restaurant_id', (req, res) => {
-    const { restaurant_id } = req.params
+router.delete('/:id', (req, res) => {
+    const { id } = req.params
     const userId = req.user._id
 
-    return Restaurants.findByIdAndDelete({ _id: restaurant_id, userId })
+    return Records.findByIdAndDelete({ _id: id, userId })
         .then(() => res.redirect('/'))
         .catch((err) => console.log('err'))
 })

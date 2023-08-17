@@ -7,8 +7,9 @@
                 選擇類別
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <li><a class="dropdown-item" href="/category?sort=">全部類別</a></li>
                 {{#each categories}}
-                <li><a class="dropdown-item" href="/sort={{this}}">{{this}}</a></li>
+                <li><a class="dropdown-item" href="/category?sort={{this}}">{{this}}</a></li>
                 {{/each}}
             </ul>
         </div>

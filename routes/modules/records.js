@@ -4,20 +4,19 @@ const router = express.Router()
 const Records = require('../../models/record')
 const Categories = require('../../models/category')
 
-let sortCategories
-
-Categories.find()
-    .sort({ _id: 'asc' })
-    .then(categories => {
-        sortCategories = categories.map(category => ({
-            id: category.id,
-            category: category.category
-        }))
-    })
-    .catch(err => console.error(err))
-
 // 新增
-router.get('/new', (req, res) => {
+router.get('/new', async (req, res) => {
+    let sortCategories
+
+    await Categories.find()
+        .sort({ _id: 'asc' })
+        .then(categories => {
+            sortCategories = categories.map(category => ({
+                id: category.id,
+                category: category.category
+            }))
+        })
+        .catch(err => console.error(err))
     return res.render("new", { categories: sortCategories })
 })
 
@@ -32,9 +31,20 @@ router.post('/', async (req, res) => {
 
 
 // 編輯
-router.get('/:id/edit', (req, res) => {
+router.get('/:id/edit', async(req, res) => {
     const { id } = req.params
     const userId = req.user._id
+    let sortCategories
+
+    await Categories.find()
+        .sort({ _id: 'asc' })
+        .then(categories => {
+            sortCategories = categories.map(category => ({
+                id: category.id,
+                category: category.category
+            }))
+        })
+        .catch(err => console.error(err))
 
     return Records.findOne({ _id: id, userId })
         .populate('categoryId')

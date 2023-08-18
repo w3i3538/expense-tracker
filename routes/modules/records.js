@@ -5,19 +5,19 @@ const Records = require('../../models/record')
 const Categories = require('../../models/category')
 
 // 新增
-router.get('/new', async (req, res) => {
+router.get('/new', (req, res) => {
     let sortCategories
 
-    await Categories.find()
+    Categories.find()
         .sort({ _id: 'asc' })
         .then(categories => {
             sortCategories = categories.map(category => ({
                 id: category.id,
                 category: category.category
             }))
+            return res.render("new", { categories: sortCategories })
         })
         .catch(err => console.error(err))
-    return res.render("new", { categories: sortCategories })
 })
 
 // 新增
@@ -31,24 +31,22 @@ router.post('/', async (req, res) => {
 
 
 // 編輯
-router.get('/:id/edit', async(req, res) => {
+router.get('/:id/edit', (req, res) => {
     const { id } = req.params
     const userId = req.user._id
     let sortCategories
 
-    await Categories.find()
+    Categories.find()
         .sort({ _id: 'asc' })
         .then(categories => {
             sortCategories = categories.map(category => ({
                 id: category.id,
                 category: category.category
             }))
+            return Records.findOne({ _id: id, userId })
+                .populate('categoryId')
+                .lean()
         })
-        .catch(err => console.error(err))
-
-    return Records.findOne({ _id: id, userId })
-        .populate('categoryId')
-        .lean()
         .then(record => {
             res.render('edit', { record, categories: sortCategories })
         })
@@ -73,7 +71,7 @@ router.delete('/:id', (req, res) => {
 
     return Records.findByIdAndDelete({ _id: id, userId })
         .then(() => res.redirect('/'))
-        .catch((err) => console.log('err'))
+        .catch(error => console.log(error))
 })
 
 module.exports = router
